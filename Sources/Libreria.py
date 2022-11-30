@@ -53,8 +53,8 @@ def W_Main_Menu():
     Label(ventana_Main_Menu, text = "Menú Principal", font = "MesloLG 35").place(x=225, y= 10)
     Label(ventana_Main_Menu, text = "Mercado " '"Santa Rosita"', font = "MesloLG 28 ").place(x=180, y= 65)
 
-    ImageHelp=PhotoImage(file="Button_Help.png")
-    ImageONOFF=PhotoImage(file="Button_On_Off.png")
+    ImageHelp=PhotoImage(file="../Resources/Button_Help.png")
+    ImageONOFF=PhotoImage(file="../Resources/Button_On_Off.png")
 
     Button(ventana_Main_Menu, image=ImageHelp,command=MB_Help).place(x=680, y=100)
     Label(ventana_Main_Menu, text = "Ayuda", font = "MesloLG 7").place(x=678, y= 131)
@@ -151,7 +151,7 @@ def W_Average():
     A_Promediar()
     global Promedios
     global ventana_Promedio
-    Icon_Home=PhotoImage(file="Home_Icon.png")
+    Icon_Home=PhotoImage(file="../Resources/Home_Icon.png")
     ventana_Promedio=Toplevel(ventana_Main_Menu)
     ventana_Main_Menu.withdraw()
     ventana_Promedio.geometry("520x525")
@@ -213,7 +213,7 @@ def W_New_Seller():
     ventana_Registro.geometry("500x500")
     ventana_Registro.resizable(False,False)
 
-    Icon_Home=PhotoImage(file="Home_Icon.png")
+    Icon_Home=PhotoImage(file="../Resources/Home_Icon.png")
 
 
     V_Nuevo_Nombre = StringVar()
@@ -369,7 +369,7 @@ def W_Search_Seller():
     V_Search_Apellido_Paterno=StringVar()
     V_Search_Apellido_Materno=StringVar()
     V_Search_Local_Number=StringVar()
-    Icon_Home=PhotoImage(file="Home_Icon.png")
+    Icon_Home=PhotoImage(file="../Resources/Home_Icon.png")
     ventana_Buscar_Vendedor=Toplevel(ventana_Main_Menu)
     ventana_Main_Menu.withdraw()
     ventana_Buscar_Vendedor.geometry("250x275")
@@ -419,7 +419,7 @@ def W_Show_Seller():
     global Vendedores
     global ventana_Mostrar_Vendedor
     global Answ_Posicion
-    Icon_Home=PhotoImage(file="Home_Icon.png")
+    Icon_Home=PhotoImage(file="../Resources/Home_Icon.png")
     ventana_Mostrar_Vendedor=Toplevel(ventana_Main_Menu)
     ventana_Main_Menu.withdraw()
     ventana_Buscar_Vendedor.destroy()
@@ -640,7 +640,7 @@ def W_Login(Log_Nombre="",Log_ApPaterno="",Log_ApMaterno="",Log_Local=""):
     V_Login_Apellido_Paterno.set(Log_ApPaterno)
     V_Login_Apellido_Materno.set(Log_ApMaterno)
     V_Login_Local_Number.set(Log_Local)
-    Icon_Home=PhotoImage(file="Home_Icon.png")
+    Icon_Home=PhotoImage(file="../Resources/Home_Icon.png")
     ventana_Login=Toplevel(ventana_Main_Menu)
     ventana_Main_Menu.withdraw()
     ventana_Login.geometry("250x275")
@@ -718,7 +718,7 @@ def W_Update_Seller():
     ventana_Actualizar.title("Mercado Santa Rosita-Actualizar Vendedor")
     ventana_Actualizar.geometry("500x500")
     ventana_Actualizar.resizable(False,False)
-    Icon_Home=PhotoImage(file="Home_Icon.png")
+    Icon_Home=PhotoImage(file="../Resources/Home_Icon.png")
 
 
     V_Update_Nombre = StringVar()
@@ -888,7 +888,7 @@ def A_Close_W_DM():
     ventana_Demo_Mode.destroy()
 
 def A_Save_State():
-    file=open("Data.txt","w")
+    file=open("../Exported Data/Data.txt","w")
     file.write(str(Vendedores))
     file.close()    
     messagebox.showinfo("Exito","Datos Guardados")
@@ -896,7 +896,7 @@ def A_Save_State():
 
 def A_Load_State():
     global Vendedores
-    file=open("Data.txt","r")
+    file=open("../Exported Data/Data.txt","r")
     answer=file.read()
     file.close()
     answer2=yaml.load(answer,CLoader)
@@ -905,13 +905,13 @@ def A_Load_State():
     A_Close_W_DM()
 
 def A_Create_Backup():
-    file=open("BackupsQuantity.txt","r")
+    file=open("../Exported Data/BackupsQuantity.txt","r")
     Quantity=int(file.read())
     file.close()
-    file=open("BackupsQuantity.txt","w")
+    file=open("../Exported Data/BackupsQuantity.txt","w")
     file.write(str(Quantity+1))
     file.close()
-    file=open("Backup_"+str(Quantity)+".txt","w")
+    file=open("../Exported Data/Backup_"+str(Quantity)+".txt","w")
     file.write(str(Vendedores))
     file.close()
     messagebox.showinfo("Exito","Backup Creado con el nombre "+"Backup_"+str(Quantity)+".txt")
@@ -920,16 +920,16 @@ def A_Create_Backup():
 def A_Delete_Backups():
     question=messagebox.askquestion("¿Seguro?","¿Desea Eliminar los datos guardados?")
     if question=="yes":
-        file=open("BackupsQuantity.txt","r")
+        file=open("../Exported Data/BackupsQuantity.txt","r")
         Quantity=int(file.read())
         file.close()
         for i in range(0,Quantity):
-            filename= "Backup_"+str(i)+".txt"      
+            filename= "../Exported Data/Backup_"+str(i)+".txt"      
             if os.path.exists(filename):
                 os.remove(filename)                
             else:
                 print("The file does not exist")
-        file=open("BackupsQuantity.txt","w")
+        file=open("../Exported Data/BackupsQuantity.txt","w")
         file.write(str(0))
         file.close()    
     messagebox.showinfo("Exito","Backups Eliminados con Exito")
@@ -938,7 +938,7 @@ def A_Delete_Backups():
 def A_Delete_State():
     question=messagebox.askquestion("¿Seguro?","¿Desea Eliminar los datos guardados?")
     if question=="yes":
-        file=open("Data.txt","w")
+        file=open("../Exported Data/Data.txt","w")
         file.write("")
         file.close()    
         messagebox.showinfo("Exito","Datos Borrados")
@@ -950,7 +950,7 @@ def W_Demo_Mode():
     ventana_Demo_Mode.title("¿Que Hacemos?")
     ventana_Demo_Mode.geometry("425x305")
     ventana_Demo_Mode.resizable(False,False)
-    ImageHelp=PhotoImage(file="Button_Help.png")
+    ImageHelp=PhotoImage(file="../Resources/Button_Help.png")
     Label(ventana_Demo_Mode,text="¿Que desea hacer?",font="MesloLG 20").pack()
     Question_Label=Label(ventana_Demo_Mode,image=ImageHelp)
     Question_Label.image=ImageHelp
