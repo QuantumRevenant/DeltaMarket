@@ -7,7 +7,7 @@ import yaml
 from yaml.cyaml import CLoader
 
 
-linkexpo="https://youtu.be/kvUGW5p5e_M"
+linkexpo="https://www.youtube.com"
 MasterKey="S!nA*OS&NBsm!LaSfWuO"
 Vendedores=[]
 DemoinUse=False
@@ -332,12 +332,14 @@ def A_New_Seller():
     global Vendedores
     Contador_Locales=0
 
+    print("Registrando...")
+
     if V_Nuevo_Nombre.get()!=""and V_Nuevo_Apellido_Paterno.get()!=""and V_Nuevo_Local.get()!=""and V_Nueva_Contraseña.get()!="":
         lenght=len(Vendedores)
         if int(V_Nuevo_Local.get())>=999:
             Contador_Locales=Contador_Locales+1
         for i in range(0,lenght):
-            if str(Vendedores[i]["Local"])==str(V_Nuevo_Local.get()) or int(V_Nuevo_Local)>=999:                
+            if str(Vendedores[i]["Local"])==str(V_Nuevo_Local.get()) or int(V_Nuevo_Local.get())>=999:                
                 Contador_Locales=Contador_Locales+1
         if Contador_Locales==0:
             if V_Nueva_Contraseña.get()==V_Nueva_Contraseña_Confirmar.get():
